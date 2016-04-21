@@ -1,0 +1,15 @@
+The goal of this exercise is to test a candidate's knowledge of
+Javascript and AngularJS.  It is also about testing how well a
+candidate is able to transform an existing application with several
+issues in it, to a version of this application that was built using
+good quality code.
+
+The assignment is to review the code of this application, to criticize
+it and to present an improved version of it without adding or removing
+any feature or external library.
+
+Please bear in mind:
+  * We are looking for good coding practices.
+  * Design is not the primary goal of this test although it is
+    important to understand how it impacts the application.
+

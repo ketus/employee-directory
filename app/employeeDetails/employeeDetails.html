@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-lg-2 col-md-2 col-xs-5 header">
+        <button ng-click="back()" class="btn btn-primary">
+            <span class="glyphicon glyphicon-chevron-left" title="Back"></span>
+        </button>
+        <button ng-click="go('/employees')" class="btn btn-primary">
+            <span title="Home"> Home </span>
+        </button>
+    </div>
+
+    <div class="col-lg-10 col-md-10 col-xs-7">
+        <h1>Employee</h1>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{employee.firstName}} {{employee.lastName}}</h3>
+    </div>
+    <div class="panel-body">
+        <img ng-src="assets/photos/{{employee.picture}}">
+        <table class="table table-hover">
+            <tr>
+                <td colspan="2"><h3>{{employee.title}}</h3></td>
+            </tr>
+            <tr>
+                <td colspan="2"><h3>{{employee.city}}</h3></td>
+            </tr>
+            <tr ng-show="employee.managerId">
+                <td class="col-md-3">Manager</td><td class="col-md-9"><a href="" ng-click="go('employees/' + employee.managerId)">{{employee.managerName}}</a></td>
+            </tr>
+            <tr ng-show="employee.reports">
+                <td class="col-md-3">Direct Reports</td>
+                <td class="col-md-9">
+                    <button ng-click="go('employees/' + employee.id + '/reports')" class="btn btn-primary">
+                        <span class="badge">{{employee.reports}}</span>
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </button>
+                </td>
+            </tr>
+            <tr ng-show="employee.officePhone">
+                <td class="col-md-3">Call Office</td>
+                <td class="col-md-9"><a href="tel:{{employee.officePhone}}">{{employee.officePhone}}</a></td>
+            </tr>
+            <tr ng-show="employee.cellPhone">
+                <td class="col-md-3">Call Cell</td>
+                <td class="col-md-9"><a href="tel:{{employee.cellPhone}}">{{employee.cellPhone}}</a></td>
+            </tr>
+            <tr ng-show="employee.cellPhone">
+                <td class="col-md-3">SMS</td>
+                <td class="col-md-9"><a href="sms:{{employee.cellPhone}}">{{employee.cellPhone}}</a></td>
+            </tr>
+            <tr ng-show="employee.email">
+                <td class="col-md-3">Email address</td>
+                <td class="col-md-9"><a href="mailto:{{employee.email}}">{{employee.email}}</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
