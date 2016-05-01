@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+    <head>
+        <title>Employees directory</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/assets/css/main.css" rel="stylesheet">
+        <script src="/vendor/angular/angular.js"></script>
+        <script src="/vendor/angular-touch/angular-touch.min.js"></script>
+        <script src="/vendor/angular-resource/angular-resource.min.js"></script>
+        <script src="/vendor/angular-route/angular-route.min.js"></script>
+    </head>
+
+    <body ng-controller="MainController">
+
+        <div ng-view ng-class="slider" class="container"></div>
+
+        <script src="/vendor/angular-animate/angular-animate.min.js"></script>
+        <script src="/app/app.js"></script>
+        <script src="/app/common/MainController.js"></script>
+        <script src="/app/common/EmployeeFactory.js"></script>
+        <script src="/app/employeeList/EmployeeListController.js"></script>
+        <script src="/app/employeeDetails/EmployeeDetailsController.js"></script>
+        <script src="/app/employeeReports/EmployeeReportsController.js"></script>
+        <script src="/app/employeeReports/ReportFactory.js"></script>
+        <script src="/app/employeeOrganogram/EmployeeOrganogramController.js"></script>
+        <script src="/app/employeeOrganogram/OrganogramFactory.js"></script>
+        <script src="/app/employeeOrganogram/OrganogramDirective.js"></script>
+    </body>
+</html>
