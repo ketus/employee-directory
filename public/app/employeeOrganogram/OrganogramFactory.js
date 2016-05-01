@@ -31,7 +31,7 @@
                     if (subordinates.length > 0) {
                         employees[i].subordinates = subordinates;
                     } else {
-                      employees[i].subordinates = [];
+                        employees[i].subordinates = [];
                     }
 
                     nestedEmployees.push(employees[i]);
