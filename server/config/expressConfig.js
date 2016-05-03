@@ -1,13 +1,14 @@
 var path = require('path'),
     express = require('express'),
-    logger = require('morgan');
+    logger = require('morgan'),
+    favicon = require('serve-favicon');
 
 
 module.exports = function(app, config){
 
-    app.use(logger('combined'));
+    app.use(logger('dev'));
     app.set('views', path.join(config.rootPath, 'server', 'views'));
     app.use(express.static(path.join(config.rootPath, 'public')));
-    //app.set('view engine', 'jade');
+    app.use(favicon(path.join(config.rootPath, 'public', 'assets', 'favicon.ico')));
 
 };
