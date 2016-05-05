@@ -15,8 +15,8 @@
             <th>Details</th>
             <th>Organogram</th>
         </tr>
-        <tr ng-repeat="employee in employees | filter:query | orderBy:id" class="">
-            <td><img ng-src="assets/photos/{{employee.picture}}" width="50px"></td>
+        <tr ng-repeat="employee in employees | filter:query | orderBy:id">
+            <td><img ng-src="/assets/photos/{{employee.picture}}" width="50px"></td>
             <td>{{employee.firstName}} {{employee.lastName}}</td>
             <td>{{employee.title}}</td>
             <td>

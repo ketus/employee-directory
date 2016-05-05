@@ -15,7 +15,7 @@
             query: function (employee) {
                 return findByManager(parseInt(employee.employeeId));
             }
-        }
+        };
 
     }]);
 
