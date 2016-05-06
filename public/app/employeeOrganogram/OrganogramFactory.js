@@ -45,7 +45,7 @@
             get: function (employee) {
                 return getNestedEmployees(employees, parseInt(employee.employeeId), []);
             }
-        }
+        };
 
     }]);
 }());
