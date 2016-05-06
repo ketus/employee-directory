@@ -20,7 +20,7 @@ var getConnection = function() {
             deferred.reject(err);
             return;
         }
-        console.log('connected as id ' + connection.threadId);
+        console.log('Connected. Connection id: ' + connection.threadId);
         deferred.resolve(connection);
     });
 
@@ -35,7 +35,6 @@ var prepareQuery = function(query, parameters) {
 };
 
 module.exports = {
-    createPool: pool,
     getConnection: getConnection,
     prepareQuery: prepareQuery
 };

@@ -1,5 +1,5 @@
 var express = require('express'),
-    env = process.env.NODE_ENV || 'development',
+    env = process.env.NODE_ENV || 'production',
     config = require('./server/config/config')[env];
 
 var app = express();

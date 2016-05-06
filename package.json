@@ -4,7 +4,9 @@
   "description": "employee directory",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-prod": "NODE_ENV=production node server.js",
+    "start-dev": "NODE_ENV=development node server.js"
   },
   "repository": {
     "type": "git",

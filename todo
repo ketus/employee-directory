@@ -1,1 +1,4 @@
-1. modify api to return also reports
+1. abstract mysql pool creation so it can use /server/config/config.js
+    without requiring it again.
+
+2.

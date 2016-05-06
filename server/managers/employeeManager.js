@@ -3,20 +3,19 @@ var connectionManager = require('./connectionManager'),
 
 var getEmployees = function() {
     var deferred = q.defer();
-    var selectEmployees =   'SELECT employee.id, firstName, lastName, managerId, title, department, email, city, picture, twitterId, blog, cellPhone, officePhone'
-                            + ' FROM employee INNER JOIN employeeContacts ON employee.id=employeeContacts.fk_employeeId;';
+    var selectEmployees = 'SELECT employee.id, firstName, lastName, managerId, title, department, email, city, picture, twitterId, blog, cellPhone, officePhone'
+                        + ' FROM employee INNER JOIN employeeContacts ON employee.id=employeeContacts.fk_employeeId;';
 
     connectionManager.getConnection()
         .then(function(connection) {
             connection.query(selectEmployees, function(err, rows) {
                 connection.release();
-                if (err) {
-                    deferred.reject(err);
-                }
+                if (err) deferred.reject(err);
                 deferred.resolve(rows);
             });
         })
         .fail(function(err) {
+            console.log(err);
             deferred.reject(err);
         });
 
@@ -24,18 +23,20 @@ var getEmployees = function() {
 };
 
 var getOneById = function(employee) {
-
     var deferred = q.defer();
-    var employeeId = parseInt(employee.employeeId);
-    var selectOneById = 'SELECT employee.id, firstName, lastName, managerId, title, department, email, city, picture, twitterId, blog, cellPhone, officePhone '
-                        + 'FROM employee INNER JOIN employeeContacts ON employee.id=employeeContacts.fk_employeeId WHERE employee.id = ?;';
-    var query = connectionManager.prepareQuery(selectOneById, [employeeId]);
+    var selectOneById = 'SELECT employee.id, firstName, lastName, managerId, title, department, email, city, picture, twitterId, blog, cellPhone, officePhone, '
+                        + '(SELECT COUNT(employee.id) FROM employee WHERE managerId = ?) as reports '
+                        + 'FROM employee INNER JOIN employeeContacts ON employee.id=employeeContacts.fk_employeeId WHERE employee.id = ?';
+
+
+    var query = connectionManager.prepareQuery(selectOneById, [parseInt(employee.employeeId),parseInt(employee.employeeId)]);
 
     connectionManager.getConnection()
         .then(function(connection) {
             connection.query(query, function(err, rows) {
                 connection.release();
                 if (err) {
+                    console.log(err);
                     deferred.reject(err);
                 }
                 deferred.resolve(rows);
@@ -48,7 +49,34 @@ var getOneById = function(employee) {
     return deferred.promise;
 };
 
+var getByManagerId = function(employee) {
+    var deferred = q.defer();
+    var selectByManagerId = 'SELECT employee.id, firstName, lastName, managerId, title, department, email, city, picture, twitterId, blog, cellPhone, officePhone'
+                        + ' FROM employee INNER JOIN employeeContacts ON employee.id=employeeContacts.fk_employeeId WHERE employee.managerId= ?;';
+
+    var query = connectionManager.prepareQuery(selectByManagerId, [parseInt(employee.employeeId)]);
+
+    connectionManager.getConnection()
+        .then(function(connection) {
+            connection.query(query, function(err, rows) {
+                connection.release();
+                if (err) {
+                    console.log(err);
+                    deferred.reject(err);
+                }
+                deferred.resolve(rows);
+            });
+        })
+        .fail(function(err) {
+            deferred.reject(err);
+        });
+
+    return deferred.promise;
+};
+
+
 module.exports = {
     getEmployees: getEmployees,
-    getOneById: getOneById
+    getOneById: getOneById,
+    getByManagerId: getByManagerId
 };

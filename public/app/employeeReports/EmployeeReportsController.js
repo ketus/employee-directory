@@ -2,10 +2,10 @@
     'use strict';
 
     angular.module('app')
-        .controller('EmployeeReportsController', ['$scope', '$routeParams', 'Report',
-            function ($scope, $routeParams, Report) {
+        .controller('EmployeeReportsController', ['$scope', '$routeParams', 'Employee',
+            function ($scope, $routeParams, Employee) {
 
-                $scope.employees = Report.query({employeeId: $routeParams.employeeId});
+                $scope.employees = Employee.getReports({id: $routeParams.employeeId});
             }]);
 
 }());
