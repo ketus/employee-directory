@@ -6,7 +6,7 @@
         return {
             restrict: 'E',
             templateUrl: 'app/employeeOrganogram/organogramTree.tpl.html'
-        }
+        };
 
     }]);
 }());

@@ -9,9 +9,9 @@ var getEmployees = function() {
     connectionManager.getConnection()
         .then(function(connection) {
             connection.query(selectEmployees, function(err, rows) {
-                connection.release();
                 if (err) deferred.reject(err);
                 deferred.resolve(rows);
+                connection.release();
             });
         })
         .fail(function(err) {
@@ -29,17 +29,18 @@ var getOneById = function(employee) {
                         + 'FROM employee INNER JOIN employeeContacts ON employee.id=employeeContacts.fk_employeeId WHERE employee.id = ?';
 
 
-    var query = connectionManager.prepareQuery(selectOneById, [parseInt(employee.employeeId),parseInt(employee.employeeId)]);
+    var query = connectionManager.prepareQuery(selectOneById,
+                [parseInt(employee.employeeId),parseInt(employee.employeeId)]);
 
     connectionManager.getConnection()
         .then(function(connection) {
             connection.query(query, function(err, rows) {
-                connection.release();
                 if (err) {
                     console.log(err);
                     deferred.reject(err);
                 }
                 deferred.resolve(rows);
+                connection.release();
             });
         })
         .fail(function(err) {
@@ -49,22 +50,24 @@ var getOneById = function(employee) {
     return deferred.promise;
 };
 
+//TODO redundant. Write API for PUT requests instead
 var getByManagerId = function(employee) {
     var deferred = q.defer();
     var selectByManagerId = 'SELECT employee.id, firstName, lastName, managerId, title, department, email, city, picture, twitterId, blog, cellPhone, officePhone'
-                        + ' FROM employee INNER JOIN employeeContacts ON employee.id=employeeContacts.fk_employeeId WHERE employee.managerId= ?;';
+                            + ' FROM employee INNER JOIN employeeContacts ON employee.id=employeeContacts.fk_employeeId WHERE employee.managerId= ?;';
 
-    var query = connectionManager.prepareQuery(selectByManagerId, [parseInt(employee.employeeId)]);
+    var query = connectionManager.prepareQuery(selectByManagerId,
+                [parseInt(employee.employeeId)]);
 
     connectionManager.getConnection()
         .then(function(connection) {
             connection.query(query, function(err, rows) {
-                connection.release();
                 if (err) {
                     console.log(err);
                     deferred.reject(err);
                 }
                 deferred.resolve(rows);
+                connection.release();
             });
         })
         .fail(function(err) {

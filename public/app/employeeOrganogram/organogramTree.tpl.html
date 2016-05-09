@@ -1,4 +1,4 @@
-<img ng-src="assets/photos/{{selectedEmployee.picture}}" title="{{selectedEmployee.firstName}} {{selectedEmployee.lastName}}" class="employee-avatar">
+<img ng-src="/assets/photos/{{selectedEmployee.picture}}" title="{{selectedEmployee.firstName}} {{selectedEmployee.lastName}}" class="employee-avatar">
 
 <ul class="organogram-top organogram">
     <li ng-repeat="employee in organogram" ng-include="'organogramTree'"></li>
@@ -6,7 +6,7 @@
 
 <script type="text/ng-template" id="organogramTree">
 
-    <img ng-src="assets/photos/{{employee.picture}}" title="{{employee.firstName}} {{employee.lastName}}" class="employee-avatar">
+    <img ng-src="/assets/photos/{{employee.picture}}" title="{{employee.firstName}} {{employee.lastName}}" class="employee-avatar">
 
     <ul class="organogram">
         <li ng-repeat="employee in employee.subordinates" ng-include="'organogramTree'"></li>

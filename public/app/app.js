@@ -28,7 +28,14 @@
             })
             .when('/employees/:employeeId/organogram', {
                 templateUrl: '/app/employeeOrganogram/employeeOrganogram.html',
-                controller: 'EmployeeOrganogramController'
+                controller: 'EmployeeOrganogramController',
+                resolve: {
+                    organogramResolve: function(Organogram, $route) {
+                        return Organogram.get({
+                            employeeId: $route.current.params.employeeId
+                        });
+                    }
+                }
             })
             .otherwise({
                 redirectTo: '/employees'

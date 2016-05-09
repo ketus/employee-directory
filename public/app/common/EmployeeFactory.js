@@ -7,9 +7,13 @@
             var Employees = $resource('/api/employees/:id', {
                 id: '@id'
             }, {
-                getReports: {
+                get: {
                     method: 'GET',
-                    url: '/api/employees/:id/reports',
+                    cache: true
+                },
+                query: {
+                    method: 'GET',
+                    cache: true,
                     isArray: true
                 }
             });

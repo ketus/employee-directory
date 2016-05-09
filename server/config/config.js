@@ -1,8 +1,9 @@
 var path = require('path');
 var rootPath = path.normalize(__dirname + '/../../');
+var prodConfig = require('./prodConfig');
 
 module.exports = {
-    
+
     development: {
         rootPath: rootPath,
         port: 3000,
@@ -16,11 +17,6 @@ module.exports = {
     production: {
         rootPath: rootPath,
         port: process.env.PORT || 3000,
-        database: {
-            dbName: 'ketus_employees',
-            host: 'ketus.heliohost.org',
-            user: 'ketus_1',
-            password: 'rootpass123'
-        }
+        database: prodConfig
     }
 };

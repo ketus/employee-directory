@@ -1,10 +1,9 @@
 var mysql = require('mysql'),
-    env = process.env.NODE_ENV || 'production',
-    config = require('../config/config')[env],
+    config = require('../config/config')[process.env.NODE_ENV],
     q = require('q');
 
 var pool = mysql.createPool({
-    connectionLimit: 100,
+    connectionLimit: 75,
     debug: false,
     database: config.database.dbName,
     host: config.database.host,

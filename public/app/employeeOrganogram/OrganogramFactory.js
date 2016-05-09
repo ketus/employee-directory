@@ -1,9 +1,7 @@
-(function () {
+(function() {
     'use strict';
 
-    angular.module('app').factory('Organogram', ['Employee', function (Employee) {
-
-        var employees = Employee.query();
+    angular.module('app').factory('Organogram', ['Employee', function(Employee) {
 
         /*
         Recursively create tree structure employees.
@@ -12,8 +10,7 @@
             parentId: id of employee from which to begin,
             checked: temporary array to hold already processed employee IDs.
          */
-        var getNestedEmployees = function (employees, parentId, checked) {
-
+        var getNestedEmployees = function(employees, parentId, checked) {
             var nestedEmployees = [];
 
             for (var i = 0, j = employees.length; i < j; i++) {
@@ -33,17 +30,21 @@
                     } else {
                         employees[i].subordinates = [];
                     }
-
                     nestedEmployees.push(employees[i]);
                 }
             }
             return nestedEmployees;
         };
 
-        return {
+        var getOrganogram = function(parentId) {
+            return Employee.query({}, function(data) {
+                getNestedEmployees(data, parentId, []);
+            });
+        };
 
-            get: function (employee) {
-                return getNestedEmployees(employees, parseInt(employee.employeeId), []);
+        return {
+            get: function(employee) {
+                return getOrganogram(parseInt(employee.employeeId));
             }
         };
 
