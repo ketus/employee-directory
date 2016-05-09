@@ -16,7 +16,7 @@
             for (var i = 0, j = employees.length; i < j; i++) {
 
                 // If there's subordinate of selected manager AND it wasn't already processed
-                if (employees[i].managerId === parentId && checked.indexOf(employees[i].id) === -1) {
+                if (employees[i].managerId === parentId && checked.indexOf(parseInt(employees[i].id)) === -1) {
 
                     // Add manager ID to list of already processed employees
                     checked.push(parentId);
@@ -37,7 +37,7 @@
         };
 
         var getOrganogram = function(parentId) {
-            return Employee.query({}, function(data) {
+            return new Employee.query({}, function(data) {
                 getNestedEmployees(data, parentId, []);
             });
         };

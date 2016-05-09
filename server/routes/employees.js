@@ -25,17 +25,17 @@ router.get('/employees/:id', function(req, res) {
             });
         });
 });
-
-router.get('/employees/:id/reports', function(req, res) {
-    employeeManager.getByManagerId({ employeeId: req.params.id })
-        .then(function(data) {
-            res.json(data);
-        })
-        .fail(function(err) {
-            res.sendStatus(500).json({
-                error: err.message
-            });
-        });
-});
+//  TODO redundant
+// router.get('/employees/:id/reports', function(req, res) {
+//     employeeManager.getByManagerId({ employeeId: req.params.id })
+//         .then(function(data) {
+//             res.json(data);
+//         })
+//         .fail(function(err) {
+//             res.sendStatus(500).json({
+//                 error: err.message
+//             });
+//         });
+// });
 
 module.exports = router;

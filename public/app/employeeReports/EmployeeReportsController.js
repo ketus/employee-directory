@@ -2,17 +2,13 @@
     'use strict';
 
     angular.module('app')
-        .controller('EmployeeReportsController', ['$scope', '$routeParams', 'Employee', 'Report',
-            function($scope, $routeParams, Employee, Report) {
+        .controller('EmployeeReportsController', ['$scope', '$routeParams', 'Employee',
+            function($scope, $routeParams, Employee) {
 
-                // Employee.query({}, function(employees) {
-                //
-                //     var id = parseInt($routeParams.employeeId);
-                //     $scope.employees = Report.findByManager(employees, id);
-                //
-                // });
-                var id = parseInt($routeParams.employeeId);
-                $scope.employees = Report.query(id);
+                //  value for filter
+                $scope.managerId = parseInt($routeParams.employeeId);
+
+                $scope.employees = Employee.query();
 
             }
         ]);
