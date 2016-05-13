@@ -26,14 +26,12 @@ var getEmployees = function() {
 
 var getOneById = function(employee) {
     var deferred = q.defer();
-    //var columns = ['firstName', 'lastName', 'managerId', 'title', 'department', 'email', 'city', 'picture', 'twitterId', 'blog', 'cellPhone', 'officePhone'];
 
     var selectOneById = 'SELECT e.*, z.*, CONCAT_WS(\' \', m.lastName, m.firstName) AS \'managerName\',\
                         (SELECT COUNT(id) FROM employee WHERE managerId = ?) AS \'reports\' \
                         FROM employee e\
                         INNER JOIN employee m ON m.id = e.managerId\
                         INNER JOIN employeeContacts z ON e.id = z.fk_employeeId WHERE e.id = ?;';
-
 
     var query = connectionManager.prepareQuery(selectOneById, [
         parseInt(employee.employeeId),
@@ -58,7 +56,7 @@ var getOneById = function(employee) {
     return deferred.promise;
 };
 
-//TODO redundant. Write API for PUT requests instead
+//TODO redundant.
 // var getByManagerId = function(employee) {
 //     var deferred = q.defer();
 //     var selectByManagerId = 'SELECT employee.id, firstName, lastName, managerId, title, department, email, city, picture, twitterId, blog, cellPhone, officePhone' + ' FROM employee INNER JOIN employeeContacts ON employee.id=employeeContacts.fk_employeeId WHERE employee.managerId= ?;';
