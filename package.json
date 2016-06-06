@@ -4,7 +4,7 @@
   "description": "employee directory",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/.bin/jasmine-node spec",
     "start-prod": "NODE_ENV=production node server.js",
     "start-dev": "NODE_ENV=development node server.js"
   },
@@ -27,9 +27,10 @@
     "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
-    "jasmine-node": "^1.14.5",
     "eslint-config-standard": "^5.3.1",
     "eslint-plugin-promise": "^1.1.0",
-    "eslint-plugin-standard": "^1.3.2"
+    "eslint-plugin-standard": "^1.3.2",
+    "jasmine-node": "^1.14.5",
+    "tupelo": "^0.1.0"
   }
 }

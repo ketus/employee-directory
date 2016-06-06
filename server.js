@@ -1,12 +1,14 @@
 var express = require('express'),
-    env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
+    logger = require('tupelo'),
+    env = process.env.NODE_ENV = process.env.NODE_ENV || 'production',
     config = require('./server/config/config')[env];
 
 var app = express();
+logger.setLogLevel('VERBOSE');
 
 require('./server/config/expressConfig')(app, config);
 require('./server/routes/routes')(app, config);
 
 app.listen(config.port, function () {
-    console.log('Server listening on port: ' + config.port);
+    logger.info('Server listening on port: ' + config.port);
 });
