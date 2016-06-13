@@ -1,5 +1,5 @@
 var mysql = require('mysql'),
-    logger = require('tupelo'),
+    log = require('tupelo'),
     config = require('../config/config')[process.env.NODE_ENV],
     q = require('q');
 
@@ -20,7 +20,7 @@ var getConnection = function() {
             deferred.reject(err);
             return;
         }
-        logger.info('Connected. Connection id: ' + connection.threadId);
+        log.info('Connected. Connection id: ' + connection.threadId);
         deferred.resolve(connection);
     });
 

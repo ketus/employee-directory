@@ -37,10 +37,12 @@
         };
 
         var getOrganogram = function(parentId) {
-            return new Employee.query({}, function(data) {
+            return Employee.query({}, function(data) {
+                console.log(data);
                 getNestedEmployees(data, parentId, []);
             });
         };
+
 
         return {
             get: function(employee) {
