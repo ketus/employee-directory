@@ -17,6 +17,7 @@ describe('calculator', function () {
 			$scope.z = 3;
 			expect($scope.z).toEqual(3);
 		});
+
 	});
 
 });

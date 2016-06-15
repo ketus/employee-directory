@@ -4,17 +4,12 @@
     angular.module('app').factory('Report', ['Employee',
         function(Employee) {
 
-            // var query = function(id) {
-            //     return Employee.query({}, function(data) {
-            //         return findByManager(data, id);
-            //     });
-            // };
             var query = function(id) {
-                return Employee.query().$promise.then(function(data) {
+                return Employee.query({}, function(data) {
                     return findByManager(data, id);
-
                 });
             };
+
 
             var findByManager = function(employees, employeeId) {
                 return employees.filter(function(element) {
