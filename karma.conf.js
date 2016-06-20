@@ -22,7 +22,7 @@ module.exports = function(config) {
             'public/vendor/angular-route/angular-route.js',
             'public/vendor/angular-touch/angular-touch.js',
             'public/app/**/*.js',
-            'public/spec/*.spec.js'
+            'public/spec/**/*.spec.js'
         ],
 
 
