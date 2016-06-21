@@ -35,7 +35,6 @@
 describe('Reports factory', function() {
 
     var reports;
-
     beforeEach(module('app'));
     beforeEach(inject(function(Report) {
         reports = Report;
@@ -44,6 +43,20 @@ describe('Reports factory', function() {
     it('should exist', function() {
         expect(reports).toBeDefined();
     });
+
+    describe('findByManager()', function() {
+
+        it('should exist', function() {
+            expect(reports.findByManager).toBeDefined();
+        });
+    });
+    describe('query()', function() {
+
+        it('should exist', function() {
+            expect(reports.query).toBeDefined();
+        });
+    });
+
 
 
 });
