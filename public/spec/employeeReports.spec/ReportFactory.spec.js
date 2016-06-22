@@ -1,60 +1,47 @@
-// (function() {
-//     'use strict';
-//
-//     angular.module('app').factory('Report', ['Employee',
-//         function(Employee) {
-//
-//             var query = function(id) {
-//                 return Employee.query({}, function(data) {
-//                     return findByManager(data, id);
-//                 });
-//             };
-//
-//
-//             var findByManager = function(employees, employeeId) {
-//                 return employees.filter(function(element) {
-//                     return employeeId === element.managerId;
-//                 });
-//
-//             };
-//
-//             return {
-//                 query: query,
-//                 // function(employee) {
-//                 // return query(parseInt(employee.employeeId), findByManager);
-//                 // },
-//                 findByManager: findByManager
-//             };
-//
-//         }
-//     ]);
-//
-// }());
+describe('_Report_ factory', function() {
 
-
-describe('Reports factory', function() {
-
-    var reports;
+    var _Report_;
     beforeEach(module('app'));
     beforeEach(inject(function(Report) {
-        reports = Report;
+        _Report_ = Report;
     }));
 
     it('should exist', function() {
-        expect(reports).toBeDefined();
+        expect(_Report_).toBeDefined();
     });
 
     describe('findByManager()', function() {
 
         it('should exist', function() {
-            expect(reports.findByManager).toBeDefined();
+            expect(_Report_.findByManager).toBeDefined();
+        });
+
+        var testObj = [{
+            managerId: 1
+        }, {
+            managerId: 2
+        }, {
+            managerId: 3
+        }, {
+            managerId: 4
+        }];
+
+        it('filter out all records from 1st parameter \
+        except on 2nd parameter and return it', function() {
+
+            expect(_Report_.findByManager(testObj, 3))
+                .toEqual([{managerId: 3}]);
+
+            expect(_Report_.findByManager(testObj, 5)).toEqual([]);
         });
     });
+
     describe('query()', function() {
 
         it('should exist', function() {
-            expect(reports.query).toBeDefined();
+            expect(_Report_.query).toBeDefined();
         });
+
     });
 
 
