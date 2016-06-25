@@ -26,8 +26,7 @@ describe('_Report_ factory', function() {
             managerId: 4
         }];
 
-        it('filter out all records from 1st parameter \
-        except on 2nd parameter and return it', function() {
+        it('filter out all records from 1st parameter except on 2nd parameter and return it', function() {
 
             expect(_Report_.findByManager(testObj, 3))
                 .toEqual([{managerId: 3}]);
