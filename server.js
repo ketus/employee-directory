@@ -1,6 +1,6 @@
 var express = require('express'),
     log = require('tupelo'),
-    env = process.env.NODE_ENV = process.env.NODE_ENV || 'production',
+    env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
     config = require('./server/config/config')[env];
 
 var app = express();

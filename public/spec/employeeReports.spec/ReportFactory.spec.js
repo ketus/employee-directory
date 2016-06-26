@@ -1,4 +1,4 @@
-describe('_Report_ factory', function() {
+describe('Report factory', function() {
 
     var _Report_;
     beforeEach(module('app'));
@@ -26,7 +26,7 @@ describe('_Report_ factory', function() {
             managerId: 4
         }];
 
-        it('filter out all records from 1st parameter except on 2nd parameter and return it', function() {
+        it('filter out all records from array (1st parameter) except on 2nd parameter and return it', function() {
 
             expect(_Report_.findByManager(testObj, 3))
                 .toEqual([{managerId: 3}]);
@@ -39,6 +39,11 @@ describe('_Report_ factory', function() {
 
         it('should exist', function() {
             expect(_Report_.query).toBeDefined();
+        });
+
+        it("should return array", function () {
+            var query = _Report_.query(1);
+            expect(Array.isArray(query)).toBeTruthy();
         });
 
     });
