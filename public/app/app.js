@@ -28,7 +28,7 @@
             })
             .when('/employees/:employeeId/organogram', {
                 templateUrl: '/app/employeeOrganogram/employeeOrganogram.html',
-                controller: 'EmployeeOrganogramController',
+                controller: 'EmployeeOrganogramController'
             })
             .otherwise({
                 redirectTo: '/employees'

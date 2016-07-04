@@ -1,15 +1,34 @@
-<img ng-src="/assets/photos/{{selectedEmployee.picture}}" title="{{selectedEmployee.firstName}} {{selectedEmployee.lastName}}" class="employee-avatar">
+<!-- <img ng-src="/assets/photos/{{selectedEmployee.picture}}" title="{{selectedEmployee.firstName}} {{selectedEmployee.lastName}}" class="element-avatar">
 
 <ul class="organogram-top organogram">
-    <li ng-repeat="employee in organogram" ng-include="'organogramTree'"></li>
+    <li ng-repeat="element in organogram" ng-include="'organogramTree'"></li>
 </ul>
 
 <script type="text/ng-template" id="organogramTree">
 
-    <img ng-src="/assets/photos/{{employee.picture}}" title="{{employee.firstName}} {{employee.lastName}}" class="employee-avatar">
+    <img ng-src="/assets/photos/{{element.picture}}" title="{{element.firstName}} {{element.lastName}}" class="element-avatar">
 
     <ul class="organogram">
-        <li ng-repeat="employee in employee.children" ng-include="'organogramTree'"></li>
+        <li ng-repeat="element in element.children" ng-include="'organogramTree'"></li>
     </ul>
 
-</script>
+</script> -->
+
+<!-- <div>
+    <img ng-src="/assets/photos/{{selectedEmployee.picture}}" title="{{selectedEmployee.firstName}} {{selectedEmployee.lastName}}" class="element-avatar">
+    <ul class="organogram-top organogram">
+
+        <li ng-repeat="element in hierarchy track by $index" ng-include="'organogramTree'">
+            <img ng-src="assets/photos/{{element.picture}}" title="{{element.firstName}} {{element.lastName}}" class="element-avatar">
+        </li>
+
+    </ul>
+
+    <script type="text/ng-template" id="organogramTree">
+        <img ng-src="/assets/photos/{{element.picture}}" title="{{element.firstName}} {{element.lastName}}" class="element-avatar">
+        <ul class="organogram">
+            <li ng-repeat="element in element.children" ng-include="'organogramTree'"></li>
+        </ul>
+    </script>
+</div> -->
+<ul><member ng-repeat='member in data' member='member'></member></ul>

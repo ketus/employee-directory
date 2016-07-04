@@ -34,7 +34,9 @@
                         nestedCollection.push(collection[i]);
                     }
                 }
+console.log(nestedCollection);
                 return nestedCollection;
+
             };
 
             return {
