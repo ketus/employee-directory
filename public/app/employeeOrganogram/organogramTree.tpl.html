@@ -1,4 +1,5 @@
-<!-- <img ng-src="/assets/photos/{{selectedEmployee.picture}}" title="{{selectedEmployee.firstName}} {{selectedEmployee.lastName}}" class="element-avatar">
+<div>
+    <!-- <img ng-src="/assets/photos/{{selectedEmployee.picture}}" title="{{selectedEmployee.firstName}} {{selectedEmployee.lastName}}" class="element-avatar">
 
 <ul class="organogram-top organogram">
     <li ng-repeat="element in organogram" ng-include="'organogramTree'"></li>
@@ -31,4 +32,11 @@
         </ul>
     </script>
 </div> -->
-<ul><member ng-repeat='member in data' member='member'></member></ul>
+
+
+    <ul>
+        <li>
+            <member ng-repeat='member in data' member='member'></member>
+        </li>
+    </ul>
+</div>

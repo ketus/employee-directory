@@ -9,23 +9,25 @@
             Params:
                 collection: list on which to perform search and transformation,
                 parentProp: string with a property name describing relationship/reference
-                startId: id of an element from which to begin hierarchy,
+                startFrom: object from which to begin creating hierarchy,
                 checked: temporary array to hold already processed IDs.
              */
-            var getNestedChildren = function(data, startId, parentProp, checked) {
+            var getNestedChildren = function(data, startFrom, parentProp, checked) {
                 var nestedCollection = [];
                 var collection = data.slice(0);
+                var firstElement = [];
+                startFrom.children = nestedCollection;
 
                 for (var i = 0, j = collection.length; i < j; i++) {
 
                     // If there's subordinate of selected manager AND it wasn't already processed
-                    if (collection[i][parentProp] === startId && checked.indexOf(parseInt(collection[i].id)) === -1) {
+                    if (collection[i][parentProp] === startFrom.id && checked.indexOf(parseInt(collection[i].id)) === -1) {
 
                         // Add manager ID to list of already processed collection
-                        checked.push(startId);
+                        checked.push(parseInt(startFrom.id));
 
                         // Search 1 level deeper if current employee has any children
-                        var children = getNestedChildren(collection, parseInt(collection[i].id), parentProp, checked);
+                        var children = getNestedChildren(collection, collection[i], parentProp, checked);
 
                         // If current employee has any children, add them as a property
                         if (children.length > 0) {
@@ -34,14 +36,17 @@
                         nestedCollection.push(collection[i]);
                     }
                 }
-console.log(nestedCollection);
+
+                firstElement.push(startFrom);
+                var wholeCollection = firstElement;
+
                 return nestedCollection;
 
             };
 
             return {
-                get: function(collection, startId, parentProp) {
-                    return getNestedChildren(collection, startId, parentProp, []);
+                get: function(collection, startFrom, parentProp) {
+                    return getNestedChildren(collection, startFrom, parentProp, []);
                 }
 
             };

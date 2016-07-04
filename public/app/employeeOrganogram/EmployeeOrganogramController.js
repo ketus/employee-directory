@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('app')
-        .controller('EmployeeOrganogramController', ['$scope', '$routeParams', 'Employee', 'Organogram',
-            function($scope, $routeParams, Employee, Organogram, getEmployees) {
+        .controller('EmployeeOrganogramController', ['$scope', '$routeParams', 'Employee', 'HierarchyService',
+            function($scope, $routeParams, Employee,  HierarchyService) {
 
                 $scope.selectedEmployee = Employee.get({
                     id: $routeParams.employeeId
@@ -18,15 +18,16 @@
                 //         $scope.employees = data;
                 //
                 //     });
+                var startFrom = Employee.get({ id: $routeParams.employeeId });
+                var parentId = 'managerId';
 
                 Employee.query()
                     .$promise
                     .then(function(data) {
-                        $scope.employees = data;
+                        // $scope.employees = data;
+                        $scope.employees = HierarchyService.get(data, startFrom, parentId);
                     });
 
-                $scope.startFrom = parseInt($routeParams.employeeId);
-                $scope.parentId = 'managerId';
             }
         ]);
 

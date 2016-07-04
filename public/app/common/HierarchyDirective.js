@@ -6,17 +6,9 @@
             restrict: 'E',
             replace: true,
             scope: {
-                data: '=data',
-                startFrom: '=',
-                parentId: '@'
+                data: '=data'
             },
-            // templateUrl: 'app/employeeOrganogram/organogramTree.tpl.html'
-            template: '<ul><li><member ng-repeat=\'member in data\' member=\'member\'></member></li></ul>',
-            link: function(scope, element, attrs) {
-                scope.$watchCollection('data', function(val) {
-                    return HierarchyService.get(scope.data, scope.startFrom, scope.parentId);
-                });
-            }
+            templateUrl: '/app/employeeOrganogram/organogramTree.tpl.html'
         };
     }])
 
