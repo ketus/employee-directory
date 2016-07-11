@@ -3,7 +3,7 @@
 
     angular.module('app')
         .controller('EmployeeOrganogramController', ['$scope', '$routeParams', 'Employee', 'HierarchyService',
-            function($scope, $routeParams, Employee,  HierarchyService) {
+            function($scope, $routeParams, Employee, HierarchyService) {
 
                 $scope.selectedEmployee = Employee.get({
                     id: $routeParams.employeeId
@@ -18,7 +18,9 @@
                 //         $scope.employees = data;
                 //
                 //     });
-                var startFrom = Employee.get({ id: $routeParams.employeeId });
+                var startFrom = Employee.get({
+                    id: $routeParams.employeeId
+                });
                 var parentId = 'managerId';
 
                 Employee.query()

@@ -1,6 +1,6 @@
-"use strict";
-
 module.exports = function(grunt) {
+    "use strict";
+
     grunt.initConfig({
         karma: {
             all: {
@@ -64,7 +64,7 @@ module.exports = function(grunt) {
         watch: {
             scripts: {
                 files: ['server/**/*.js',
-                        'public/**/*.js'
+                    'public/**/*.js'
                 ],
                 tasks: ['test'],
                 options: {
