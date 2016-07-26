@@ -2,8 +2,9 @@
     'use strict';
 
     angular.module('app')
-        .factory('Employee', ['$resource', function($resource) {
+        .factory('Employee', ['$resource', Employee]);
 
+        function Employee($resource) {
             var Employees = $resource('/api/employees/:id', {
                 id: '@id'
             }, {
@@ -19,7 +20,6 @@
             });
 
             return Employees;
-
-        }]);
+        }
 
 }());
