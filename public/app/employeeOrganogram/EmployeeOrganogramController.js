@@ -5,7 +5,21 @@
         .controller('EmployeeOrganogramController', ['$scope', '$routeParams', 'Employee', 'HierarchyService',
             function($scope, $routeParams, Employee, HierarchyService) {
 
-                $scope.employees = [{
+                $scope.selectedEmployee = Employee.get({
+                    id: $routeParams.employeeId
+                });
+
+                var parentId = 'managerId';
+                var startFrom = parseInt($routeParams.employeeId);
+
+                Employee.query()
+                    .$promise
+                    .then(function(data) {
+                        // $scope.employees = data;
+                        $scope.employees = HierarchyService.get(data, startFrom, parentId);
+                    });
+
+                $scope.employees_static = [{
                     "id": 2,
                     "firstName": "Bart",
                     "lastName": "Simpson",
@@ -187,21 +201,7 @@
                         ]
                     }]
                 }];
-                $scope.selectedEmployee = Employee.get({
-                    id: $routeParams.employeeId
-                });
 
-                var parentId = 'managerId';
-                var startFrom = Employee.get({
-                    id: $routeParams.employeeId
-                });
-
-                Employee.query()
-                    .$promise
-                    .then(function(data) {
-                        $scope.employees = HierarchyService.get(data, startFrom, parentId);
-                        // $scope.employees = HierarchyService.get(data, startFrom, parentId);
-                    });
 
             }
         ]);

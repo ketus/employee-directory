@@ -15,12 +15,12 @@
                 member: '='
             },
             // templateUrl: '/app/employeeOrganogram/organogramTree.tpl.html'
-            template: '<ul><li><img ng-src="/assets/photos/{{member.picture}}" title="{{member.firstName}} {{member.lastName}}" class="employee-avatar"></li></ul>',
+            template: '<ul><li><img ng-src="/assets/photos/{{member.picture}}" title="{{member.firstName}} {{member.lastName}}" ></li></ul>',
             link: function(scope, element, attrs) {
-                var collectionSt = '<em-hierarchy data="member.children"></em-hierarchy>';
+                var collection = '<em-hierarchy data="member.children"></em-hierarchy>';
                 if (angular.isArray(scope.member.children)) {
 
-                    $compile(collectionSt)(scope, function(cloned, scope) {
+                    $compile(collection)(scope, function(cloned, scope) {
                         element.append(cloned);
                     });
 
