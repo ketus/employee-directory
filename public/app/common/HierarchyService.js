@@ -26,7 +26,7 @@
              */
             function getNestedChildren(data, startFrom, parentProperty, checked) {
                 var nestedCollection = [];
-                var collection = angular.copy(data);
+                var collection = data.slice(0);
 
                 for (var i = 0, j = collection.length; i < j; i++) {
 
@@ -37,18 +37,16 @@
                         checked.push(parseInt(startFrom));
 
                         // Search 1 level deeper if current employee has any children
-                        var children = getNestedChildren(collection, collection[i], parentProperty, checked);
+                        var children = getNestedChildren(collection, parseInt(collection[i].id), parentProperty, checked);
 
                         // If current employee has any children, add them as a property
                         if (children.length > 0) {
                             collection[i].children = children;
-                        } else {
-                            collection[i].children = [];
-                        }
+                        } 
                         nestedCollection.push(collection[i]);
                     }
                 }
-                
+
                 return nestedCollection;
             }
         }

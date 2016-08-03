@@ -66,17 +66,18 @@
 }
 
 .organogram-top {
-    white-space: nowrap;
+
 }
 
-.organogram{
+.organogram {
+    white-space: nowrap;
     list-style-type: none;
     margin-right: 30px;
-    padding-left: 0;
+
 }
 
-.organogram > li{
-    display: inline-table;
+.organogram li{
+    display: inline;
 }
 
 .employee-avatar {

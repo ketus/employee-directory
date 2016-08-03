@@ -14,12 +14,11 @@
             scope: {
                 member: '='
             },
-            // templateUrl: '/app/employeeOrganogram/organogramTree.tpl.html'
-            template: '<ul><li><img ng-src="/assets/photos/{{member.picture}}" title="{{member.firstName}} {{member.lastName}}" ></li></ul>',
+            templateUrl: '/app/common/hierarchyMember.tpl.html',
             link: function(scope, element, attrs) {
                 var collection = '<em-hierarchy data="member.children"></em-hierarchy>';
-                if (angular.isArray(scope.member.children)) {
 
+                if (angular.isArray(scope.member.children)) {
                     $compile(collection)(scope, function(cloned, scope) {
                         element.append(cloned);
                     });
