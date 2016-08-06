@@ -5,9 +5,7 @@
         .module('app')
         .directive('emHierarchy', hierarchyDirective);
 
-    hierarchyDirective.$inject = ['HierarchyService'];
-
-    function hierarchyDirective(HierarchyService) {
+    function hierarchyDirective() {
         return {
             restrict: 'E',
             replace: true,
