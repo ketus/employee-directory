@@ -2,14 +2,24 @@
     'use strict';
 
     angular.module('app')
-        .controller('EmployeeReportsController', ['$scope', '$routeParams', 'Employee',
-            function($scope, $routeParams, Employee) {
+        .controller('EmployeeReportsController', ['$scope', '$routeParams', 'Report',
+            function($scope, $routeParams, Report) {
 
-                // value for filter
-                $scope.managerId = parseInt($routeParams.employeeId);
+                var vm = this;
 
-                $scope.employees = Employee.query();
+                vm.employees = Report.query(parseInt($routeParams.employeeId));
 
+                // Employee.query()
+                //     .$promise
+                //     .then(function(data){
+                //         vm.employees = getReports(data, parseInt($routeParams.employeeId));
+                //     });
+                //
+                // function getReports(data, filterBy) {
+                //     return data.filter(function(element) {
+                //         return element.managerId === filterBy;
+                //     })
+                // }
             }
         ]);
 

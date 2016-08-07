@@ -1,20 +1,24 @@
 (function() {
     'use strict';
 
-    angular.module('app')
-        .controller('EmployeeOrganogramController', ['$scope', '$routeParams', 'Employee', 'HierarchyService',
-            function($scope, $routeParams, Employee, HierarchyService) {
+    angular
+        .module('app')
+        .controller('EmployeeOrganogram', EmployeeOrganogram);
 
-                var parentId = 'managerId';
-                var startFrom = parseInt($routeParams.employeeId);
+        EmployeeOrganogram.$inject = ['$scope', '$routeParams', 'Employee', 'HierarchyService'];
 
-                Employee.query()
-                    .$promise
-                    .then(function(data) {
-                        $scope.employees = HierarchyService.get(data, startFrom, parentId);
-                    });
+        function EmployeeOrganogram($scope, $routeParams, Employee, HierarchyService) {
 
-            }
-        ]);
+            var vm = this;
+            var parentId = 'managerId';
+            var startFrom = parseInt($routeParams.employeeId);
+
+            Employee.query()
+                .$promise
+                .then(function(data) {
+                    vm.employees = HierarchyService.get(data, startFrom, parentId);
+                });
+
+        }
 
 }());

@@ -1,32 +1,31 @@
 (function() {
     'use strict';
 
-    angular.module('app').factory('Report', ['Employee',
-        function(Employee) {
+    angular
+        .module('app')
+        .factory('Report', report);
 
-            var query = function(id) {
-                return Employee.query({}, function(data) {
-                    return findByManager(data, id);
-                });
-            };
+    report.$inject = ['Employee'];
 
+    function report(Employee) {
 
-            var findByManager = function(employees, employeeId) {
-                return employees.filter(function(element) {
-                    return employeeId === element.managerId;
-                });
+        return {
+            search: search,
+            findByManager: findByManager
+        };
 
-            };
+        function search(id) {
+            return Employee.query({}, function(data) {
+                return findByManager(data, id);
+            });
+        }
 
-            return {
-                query: query,
-                // function(employee) {
-                // return query(parseInt(employee.employeeId), findByManager);
-                // },
-                findByManager: findByManager
-            };
+        function findByManager(employees, employeeId) {
+            return employees.filter(function(element) {
+                return element.managerId === employeeId;
+            });
 
         }
-    ]);
+    }
 
 }());

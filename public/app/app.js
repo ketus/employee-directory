@@ -1,12 +1,17 @@
 (function() {
     'use strict';
 
-    angular.module('app', [
+    angular
+        .module('app', [
         'ngTouch',
         'ngRoute',
         'ngAnimate',
         'ngResource'
-    ]).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+    ]).config(config);
+
+    config.$inject = ['$routeProvider', '$locationProvider'];
+
+    function config($routeProvider, $locationProvider) {
 
         $locationProvider.html5Mode({
             enabled: true,
@@ -24,15 +29,17 @@
             })
             .when('/employees/:employeeId/reports', {
                 templateUrl: '/app/employeeReports/employeeReports.html',
-                controller: 'EmployeeReportsController'
+                controller: 'EmployeeReportsController',
+                controllerAs: 'reports'
             })
             .when('/employees/:employeeId/organogram', {
                 templateUrl: '/app/employeeOrganogram/employeeOrganogram.html',
-                controller: 'EmployeeOrganogramController'
+                controller: 'EmployeeOrganogram',
+                controllerAs: 'organogram'
             })
             .otherwise({
                 redirectTo: '/employees'
             });
-    }]);
+    }
 
 }());

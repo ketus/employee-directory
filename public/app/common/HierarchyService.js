@@ -12,10 +12,10 @@
         };
 
         function getHierarchy(collection, startFrom, parentProperty) {
-
             var rootElement = [];
             rootElement.push(getRootElement(collection, startFrom));
             rootElement[0].children = getNestedChildren(collection, startFrom, parentProperty, []);
+
             return rootElement;
         }
 
