@@ -10,11 +10,11 @@
     function report(Employee) {
 
         return {
-            search: search,
+            query: query,
             findByManager: findByManager
         };
 
-        function search(id) {
+        function query(id) {
             return Employee.query({}, function(data) {
                 return findByManager(data, id);
             });

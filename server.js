@@ -4,10 +4,12 @@ var express = require('express'),
     config = require('./server/config/config')[env];
 
 var app = express();
-log.setLogLevel('VERBOSE');
 
 require('./server/config/expressConfig')(app, config);
 require('./server/routes/routes')(app, config);
+
+
+log.setLogLevel('VERBOSE');
 
 app.listen(config.port, function () {
     log.info('Server listening on port: ' + config.port);

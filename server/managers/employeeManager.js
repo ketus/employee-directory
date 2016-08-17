@@ -1,7 +1,14 @@
 var connectionManager = require('./connectionManager'),
-    q = require('q');
+    q = require('q'),
+    log = require('tupelo');
 
-var getEmployees = function() {
+module.exports = {
+    getEmployees: getEmployees,
+    getOneById: getOneById,
+    getByManagerId: getByManagerId
+};
+
+function getEmployees() {
     var deferred = q.defer();
     var selectEmployees = 'SELECT employee.id, firstName, lastName, managerId, title, department, \
                             email, city, picture, twitterId, blog, cellPhone, officePhone \
@@ -17,14 +24,14 @@ var getEmployees = function() {
             });
         })
         .fail(function(err) {
-            console.log(err);
+            log.error(err);
             deferred.reject(err);
         });
 
     return deferred.promise;
-};
+}
 
-var getOneById = function(employee) {
+function getOneById(employee) {
     var deferred = q.defer();
 
     var selectOneById = 'SELECT e.*, z.*, CONCAT_WS(\' \', m.lastName, m.firstName) AS \'managerName\',\
@@ -42,7 +49,7 @@ var getOneById = function(employee) {
         .then(function(connection) {
             connection.query(query, function(err, rows) {
                 if (err) {
-                    console.log(err);
+                    log.error(err);
                     deferred.reject(err);
                 }
                 deferred.resolve(rows);
@@ -54,38 +61,32 @@ var getOneById = function(employee) {
         });
 
     return deferred.promise;
-};
-
-//TODO redundant.
-// var getByManagerId = function(employee) {
-//     var deferred = q.defer();
-//     var selectByManagerId = 'SELECT employee.id, firstName, lastName, managerId, title, department, email, city, picture, twitterId, blog, cellPhone, officePhone' + ' FROM employee INNER JOIN employeeContacts ON employee.id=employeeContacts.fk_employeeId WHERE employee.managerId= ?;';
-//
-//     var query = connectionManager.prepareQuery(selectByManagerId, [
-//         parseInt(employee.employeeId)
-//     ]);
-//
-//     connectionManager.getConnection()
-//         .then(function(connection) {
-//             connection.query(query, function(err, rows) {
-//                 if (err) {
-//                     console.log(err);
-//                     deferred.reject(err);
-//                 }
-//                 deferred.resolve(rows);
-//                 connection.release();
-//             });
-//         })
-//         .fail(function(err) {
-//             deferred.reject(err);
-//         });
-//
-//     return deferred.promise;
-// };
+}
 
 
-module.exports = {
-    getEmployees: getEmployees,
-    getOneById: getOneById
-    //getByManagerId: getByManagerId
-};
+function getByManagerId(managerId) {
+    var deferred = q.defer();
+    var selectByManagerId = 'SELECT employee.id, firstName, lastName, managerId, title, department, email, city, picture, twitterId, blog, cellPhone, officePhone' +
+                            ' FROM employee INNER JOIN employeeContacts ON employee.id=employeeContacts.fk_employeeId WHERE employee.managerId= ?;';
+
+    var query = connectionManager.prepareQuery(selectByManagerId, [
+        parseInt(employee.employeeId)
+    ]);
+
+    connectionManager.getConnection()
+        .then(function(connection) {
+            connection.query(query, function(err, rows) {
+                if (err) {
+                    log.error(err);
+                    deferred.reject(err);
+                }
+                deferred.resolve(rows);
+                connection.release();
+            });
+        })
+        .fail(function(err) {
+            deferred.reject(err);
+        });
+
+    return deferred.promise;
+}

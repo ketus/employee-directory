@@ -1,3 +1,8 @@
+module.exports = {
+    getConnection: getConnection,
+    prepareQuery: prepareQuery
+};
+
 var mysql = require('mysql'),
     log = require('tupelo'),
     config = require('../config/config')[process.env.NODE_ENV],
@@ -12,8 +17,7 @@ var pool = mysql.createPool({
     password: config.database.password
 });
 
-var getConnection = function() {
-
+function getConnection() {
     var deferred = q.defer();
     pool.getConnection(function(err, connection) {
         if (err) {
@@ -25,16 +29,11 @@ var getConnection = function() {
     });
 
     return deferred.promise;
-};
+}
 
-var prepareQuery = function(query, parameters) {
+function prepareQuery(query, parameters) {
     if (!query || !parameters) {
         throw new Error('query and parameters function parameters must be specified.');
     }
     return mysql.format(query, parameters);
-};
-
-module.exports = {
-    getConnection: getConnection,
-    prepareQuery: prepareQuery
-};
+}

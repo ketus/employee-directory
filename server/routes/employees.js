@@ -2,6 +2,8 @@ var express = require('express'),
     router = express.Router(),
     employeeManager = require('../managers/employeeManager');
 
+module.exports = router;
+
 router.get('/employees', function(req, res) {
     employeeManager.getEmployees()
         .then(function(data) {
@@ -16,20 +18,13 @@ router.get('/employees', function(req, res) {
 
 router.get('/employees/:id', function(req, res) {
     employeeManager.getOneById({ employeeId: req.params.id })
-        .then(function(data) {
-            res.json(data[0]); // Send object instead of an array
-        })
-        .fail(function(err) {
-            res.sendStatus(500).json({
-                error: err.message
-            });
-        });
+        .then(success)
+        .fail(error);
 });
-//  TODO redundant
-// router.get('/employees/:id/reports', function(req, res) {
-//     employeeManager.getByManagerId({ employeeId: req.params.id })
+// router.get('/employees/:id', function(req, res) {
+//     employeeManager.getOneById({ employeeId: req.params.id })
 //         .then(function(data) {
-//             res.json(data);
+//             res.json(data[0]); // Send object instead of an array
 //         })
 //         .fail(function(err) {
 //             res.sendStatus(500).json({
@@ -38,4 +33,23 @@ router.get('/employees/:id', function(req, res) {
 //         });
 // });
 
-module.exports = router;
+router.get('/employees/:id/reports', function(req, res) {
+    employeeManager.getByManagerId({ employeeId: req.params.id })
+        .then(function(data) {
+            res.json(data);
+        })
+        .fail(function(err) {
+            res.sendStatus(500).json({
+                error: err.message
+            });
+        });
+});
+
+function success(data) {
+    this.res.json(data);
+}
+
+function error(data) {
+    this.res.sendStatus(500)
+        .json({ error: err.message });
+}
