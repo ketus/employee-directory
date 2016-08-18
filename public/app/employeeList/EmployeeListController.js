@@ -1,13 +1,14 @@
 (function() {
     'use strict';
 
-    angular.module('app')
-        .controller('EmployeeListController', ['$scope', 'Employee',
-            function($scope, Employee) {
+    angular
+        .module('app')
+        .controller('EmployeeList', EmployeeList);
 
-                $scope.employees = Employee.query();
+    EmployeeList.$inject = ['$scope', 'Employee'];
 
-            }
-        ]);
-
+    function EmployeeList($scope, Employee) {
+        var vm = this;
+        vm.employees = Employee.query();
+    }
 }());

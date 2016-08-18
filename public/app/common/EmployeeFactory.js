@@ -8,9 +8,8 @@
         Employee.$inject = ['$resource'];
 
         function Employee($resource) {
-            var Employees = $resource('/api/employees/:id', {
-                id: '@id'
-            }, {
+            var Employees = $resource('/api/employees/:id', { id: '@id' },
+            {
                 get: {
                     method: 'GET',
                     cache: true
@@ -20,8 +19,9 @@
                     cache: true,
                     isArray: true
                 },
-                getRreports: {
+                getReports: {
                     url: '/api/employees/:id/reports',
+                    params: { id: '@id' },
                     method: 'GET',
                     cache: true,
                     isArray: true

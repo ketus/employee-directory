@@ -7,7 +7,8 @@
         'ngRoute',
         'ngAnimate',
         'ngResource'
-    ]).config(config);
+        ])
+        .config(config);
 
     config.$inject = ['$routeProvider', '$locationProvider'];
 
@@ -21,15 +22,17 @@
         $routeProvider
             .when('/employees', {
                 templateUrl: '/app/employeeList/employeeList.html',
-                controller: 'EmployeeListController'
+                controller: 'EmployeeList',
+                controllerAs: 'list'
             })
             .when('/employees/:employeeId', {
                 templateUrl: '/app/employeeDetails/employeeDetails.html',
-                controller: 'EmployeeDetailsController'
+                controller: 'EmployeeDetails',
+                controllerAs: 'details'
             })
             .when('/employees/:employeeId/reports', {
                 templateUrl: '/app/employeeReports/employeeReports.html',
-                controller: 'EmployeeReportsController',
+                controller: 'EmployeeReports',
                 controllerAs: 'reports'
             })
             .when('/employees/:employeeId/organogram', {

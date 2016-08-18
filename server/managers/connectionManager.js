@@ -1,12 +1,13 @@
+var mysql = require('mysql'),
+    log = require('tupelo'),
+    config = require('../config/config')[process.env.NODE_ENV],
+    q = require('q');
+
 module.exports = {
     getConnection: getConnection,
     prepareQuery: prepareQuery
 };
 
-var mysql = require('mysql'),
-    log = require('tupelo'),
-    config = require('../config/config')[process.env.NODE_ENV],
-    q = require('q');
 
 var pool = mysql.createPool({
     connectionLimit: 75,

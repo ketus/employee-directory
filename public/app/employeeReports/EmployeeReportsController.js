@@ -1,26 +1,19 @@
 (function() {
     'use strict';
 
-    angular.module('app')
-        .controller('EmployeeReportsController', ['$scope', '$routeParams', 'Employee',
-            function($scope, $routeParams, Employee) {
+    angular
+        .module('app')
+        .controller('EmployeeReports', EmployeeReports);
 
-                var vm = this;
+    EmployeeReports.$inject = ['$scope', '$routeParams', 'Employee'];
 
-                // vm.employees = Report.query(parseInt($routeParams.employeeId));
+    function EmployeeReports($scope, $routeParams, Employee) {
 
-                Employee.query()
-                    .$promise
-                    .then(function(data){
-                        vm.employees = getReports(data, parseInt($routeParams.employeeId));
-                    });
+        var vm = this;
+        vm.employees = Employee.getReports({
+            id: parseInt($routeParams.employeeId)
+        });
 
-                function getReports(data, filterBy) {
-                    return data.filter(function(element) {
-                        return element.managerId === filterBy;
-                    });
-                }
-            }
-        ]);
+    }
 
 }());

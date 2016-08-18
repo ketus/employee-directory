@@ -1,10 +1,17 @@
-(function () {
+(function() {
     'use strict';
 
-    angular.module('app').controller('EmployeeDetailsController', ['$scope', '$routeParams', 'Employee',
-        function ($scope, $routeParams, Employee) {
+    angular
+        .module('app')
+        .controller('EmployeeDetails', EmployeeDetails);
 
-            $scope.employee = Employee.get({id: $routeParams.employeeId});
-        }]);
+    EmployeeDetails.$inject = ['$scope', '$routeParams', 'Employee'];
+
+    function EmployeeDetails($scope, $routeParams, Employee) {
+        var vm = this;
+        vm.employee = Employee.get({
+            id: $routeParams.employeeId
+        });
+    }
 
 }());

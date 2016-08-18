@@ -40,10 +40,11 @@ function getOneById(employee) {
                         INNER JOIN employee m ON m.id = e.managerId\
                         INNER JOIN employeeContacts z ON e.id = z.fk_employeeId WHERE e.id = ?;';
 
-    var query = connectionManager.prepareQuery(selectOneById, [
-        parseInt(employee.employeeId),
-        parseInt(employee.employeeId)
-    ]);
+    var query = connectionManager
+                    .prepareQuery(
+                        selectOneById,
+                        [parseInt(employee.employeeId), parseInt(employee.employeeId)]
+                    );
 
     connectionManager.getConnection()
         .then(function(connection) {
@@ -64,10 +65,11 @@ function getOneById(employee) {
 }
 
 
-function getByManagerId(managerId) {
+function getByManagerId(employee) {
     var deferred = q.defer();
     var selectByManagerId = 'SELECT employee.id, firstName, lastName, managerId, title, department, email, city, picture, twitterId, blog, cellPhone, officePhone' +
-                            ' FROM employee INNER JOIN employeeContacts ON employee.id=employeeContacts.fk_employeeId WHERE employee.managerId= ?;';
+                            ' FROM employee INNER JOIN employeeContacts' +
+                            ' ON employee.id=employeeContacts.fk_employeeId WHERE managerId=?;';
 
     var query = connectionManager.prepareQuery(selectByManagerId, [
         parseInt(employee.employeeId)
