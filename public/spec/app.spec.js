@@ -54,7 +54,7 @@ describe('MainController', function() {
             history: {
                 back: jasmine.createSpy()
             }
-        }
+        };
 
         _$controller_('MainController', {
             $scope: $scope,
@@ -77,7 +77,7 @@ describe('MainController', function() {
 
         it('should change url by using $location.url()', function() {
 
-            var url = '/employees'
+            var url = '/employees';
             spyOn($location, 'url');
             $scope.go(url);
             expect($location.url).toHaveBeenCalledWith(url);
