@@ -11,7 +11,7 @@
     </div>
 
     <div class="col-lg-10 col-md-10 col-xs-7">
-        <h1>details.employee</h1>
+        <h1>Employee</h1>
     </div>
 </div>
 
@@ -42,7 +42,7 @@
             <tr ng-show="details.employee.reports">
                 <td class="col-md-3">Direct Reports</td>
                 <td class="col-md-9">
-                    <button ng-click="go('details.employees/' + details.employee.id + '/reports')" class="btn btn-primary">
+                    <button ng-click="go('employees/' + details.employee.id + '/reports')" class="btn btn-primary">
                         <span class="badge">{{details.employee.reports}}</span>
                         <span class="glyphicon glyphicon-chevron-right"></span>
                     </button>

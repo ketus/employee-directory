@@ -5,6 +5,8 @@ var prodConfig = require('./prodConfig');
 module.exports = {
 
     development: {
+        index: path.join(rootPath, 'public', 'app', 'index.html'),
+        debugLevel: 'VERBOSE',
         rootPath: rootPath,
         port: 3000,
         database: {
@@ -15,6 +17,7 @@ module.exports = {
         }
     },
     production: {
+        debugLevel: 'WARN',
         rootPath: rootPath,
         port: process.env.PORT || 3000,
         database: prodConfig
