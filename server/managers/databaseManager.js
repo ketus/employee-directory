@@ -12,11 +12,11 @@ module.exports = {
 
 var pool = mysql.createPool({
     connectionLimit: 75,
-    debug: false,
-    database: config.database.dbName,
-    host: config.database.host,
-    user: config.database.user,
-    password: config.database.password
+    debug:      false,
+    database:   config.database.dbName,
+    host:       config.database.host,
+    user:       config.database.user,
+    password:   config.database.password
 });
 
 function getConnection() {
@@ -25,7 +25,7 @@ function getConnection() {
         if (err) {
             log.error(err);
             deferred.reject(err);
-        } else {            
+        } else {
             log.info('Connected. Connection id: ' + connection.threadId);
             deferred.resolve(connection);
         }
@@ -39,7 +39,7 @@ function prepareQuery(query, parameters) {
         var error = new Error(error);
         var message = 'Query and parameters function parameters must be specified';
         log.error(message, error.stack);
-        return error
+        return error;
     }
     return mysql.format(query, parameters);
 }
